@@ -56,4 +56,9 @@ ssize_t getstdin(char **lineptr, int file);
 char  *clean_line(char *content);
 void fu_push(stack_t **head, unsigned int number);
 void fu_pall(stack_t **head, unsigned int number);
+int execute(char *content, stack_t **head, unsigned int counter, FILE *file);
+void free_stack(stack_t *head);
+void add_node(stack_t **head, int n);
+void add_queue(stack_t **head, int n);
+ssize_t getline(char **lineptr, size_t *n, FILE *stream);
 #endif
