@@ -6,8 +6,8 @@
 #include <stdlib.h>
 #include <ctype.h>
 
-
 #define DELIMITER " \n\t"
+#define BUFFER_SIZE 15000
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -36,14 +36,48 @@ typedef struct stack_s
 typedef struct instruction_s
 {
 	char *opcode;
-	void (*func)(stack_t **stack, unsigned int line_number, char *operand);
+	void (*func)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-void push(stack_t **, unsigned int, char *);
-void pall(stack_t **, unsigned int, char *);
+/**
+ * struct operation_s - Information needed to be carried bettween files
+ * @int_value: The inteager in the line
+ * @line: The line red from file
+ * @file: The file providing the commands
+ *
+ * Description: info needed
+ * for stack, queues, LIFO, FIFO
+ */
+typedef struct operation_s
+{
+	char  *int_value;
+	char *line;
+	FILE *file;
+} operation_t;
+
+extern operation_t ops;
+
+/*manipulate_stack_1_module.c*/
+void push(stack_t **, unsigned int);
+void pall(stack_t **, unsigned int);
+void pint(stack_t **, unsigned int);
+void pop(stack_t **, unsigned int);
+void swap(stack_t **, unsigned int);
+
+/*manipulate_stack_1_module_2.c*/
+void pchar(stack_t **, unsigned int);
+void pstr(stack_t **, unsigned int);
+void rotl(stack_t **, unsigned int);
+void rotr(stack_t **, unsigned int);
+
+/*arithmetic.c*/
+void mul(stack_t **, unsigned int);
+void mod(stack_t **, unsigned int);
+
+/*util.c*/
 int parse_line(char *, stack_t **, unsigned int, FILE *);
 void free_stack(stack_t *);
-void add_node(stack_t **, int n);
+void add_node(stack_t **head, int n);
 
 #endif
 

@@ -11,23 +11,30 @@
  */
 int parse_line(char *args, stack_t **stack, unsigned int line_num, FILE *file)
 {
-	char *opcode = NULL, *operand = NULL;
+	char *opcode = NULL;
 	instruction_t opcodes[] = {
 		{"push", push},
+		{"pint", pint},
 		{"pall", pall},
+		{"pop", pop},
+		{"swap", swap},
+		{"mul", mul},
+		{"mod", mod},
+		{"pchar", pchar},
+		{"pstr", pstr},
+		{"rotl", rotl},
+		{"rotr", rotr},
 		{NULL, NULL}
 	};
 	int idx = 0;
 
 	opcode = strtok(args, DELIMITER);
-	if (opcode && opcode[0] == '#')/*In case of comments*/
-		return (0);
-	operand = strtok(NULL, DELIMITER);
+	ops.int_value = strtok(NULL, DELIMITER);
 	while (opcodes[idx].opcode && opcode)
 	{
 		if (strcmp(opcode, opcodes[idx].opcode) == 0)
 		{
-			opcodes[idx].func(stack, line_num, operand);
+			opcodes[idx].func(stack, line_num);
 			return (0);
 		}
 		idx++;
@@ -70,7 +77,6 @@ void free_stack(stack_t *stack)
 void add_node(stack_t **stack, const int n)
 {
 	stack_t *new;
-	stack_t *tmp = *stack;
 
 	new = malloc(sizeof(stack_t));
 	if (new == NULL)
@@ -79,11 +85,17 @@ void add_node(stack_t **stack, const int n)
 	new->prev = NULL;
 
 
-	if (tmp != NULL)
-		while (tmp->prev != NULL)
-			tmp = tmp->prev;
-	new->next = tmp;
-	if (tmp != NULL)
-		tmp->prev = new;
+	if ((*stack) != NULL)
+	{
+		while ((*stack)->prev != NULL)
+			*stack = (*stack)->prev;
+	}
+
+	new->next = *stack;
+
+	if ((*stack) != NULL)
+		(*stack)->prev = new;
+
 	*stack = new;
+
 }
