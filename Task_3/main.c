@@ -1,5 +1,5 @@
 #include "monty.h"
-
+operation_t ops = {NULL, NULL, NULL};
 /**
  * main - monty code interpreter
  * @argc: number of arguments
@@ -8,7 +8,7 @@
  */
 int main(int argc, char *argv[])
 {	
-	operation_t ops = {NULL, NULL, NULL};
+	
 	char *content = NULL;
 
 	FILE *file; /*file pointer*/

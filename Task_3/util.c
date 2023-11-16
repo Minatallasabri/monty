@@ -11,7 +11,7 @@
  */
 int parse_line(char *args, stack_t **stack, unsigned int line_num, FILE * file)
 {
-    char *opcode = NULL, *operand = NULL;
+    char *opcode = NULL;
     instruction_t opcodes []= {
         {"push", push},
         {"pint", pint},
@@ -82,10 +82,10 @@ void add_node(stack_t **stack, const int n)
 	if ((*stack) != NULL)
 	{
 		while ((*stack)->prev != NULL)
-			stack = (*stack)->prev;
+			*stack = (*stack)->prev;
 	}
 
-	new->next = stack;
+	new->next = *stack;
 
 	if ((*stack) != NULL)
 		(*stack)->prev = new;
