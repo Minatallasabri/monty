@@ -14,7 +14,7 @@ void push(stack_t **stack, unsigned int line_num, char *ope)
 	{
 		if (ope[0] == '-')
 			idx++;
-		for (; ope[idx] != '\0'; i++)
+		for (; ope[idx] != '\0'; idx++)
 			if (ope[idx] > 57 || ope[idx] < 48)
 			{
 				not_int = 1;
