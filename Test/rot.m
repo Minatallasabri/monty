@@ -6,3 +6,5 @@ push 4
 pall
 rotl
 pall
+rotr
+pall
