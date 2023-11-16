@@ -23,16 +23,12 @@ void push(stack_t **stack, unsigned int line_num, char *ope)
 		if (not_int == 1)
 		{
 			fprintf(stderr, "L%d: usage: push integer\n", line_num);
-			free_stack(*stack);
-			free(ope);
 			exit(EXIT_FAILURE);
 		}
 	}
 	else
 	{
 		fprintf(stderr, "L%d: usage: push integer\n", line_num);
-		free_stack(*stack);
-		free(ope);
 		exit(EXIT_FAILURE);
 	}
 	num = atoi(ope);
