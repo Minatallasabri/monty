@@ -8,14 +8,14 @@
  */
 void push(stack_t **stack, unsigned int line_num, char *ope)
 {
-	int n, i = 0, not_int = 0;
+	int num, idx = 0, not_int = 0;
 
 	if (ope)
 	{
 		if (ope[0] == '-')
-			i++;
-		for (; ope[i] != '\0'; i++)
-			if (ope[i] > 57 || ope[i] < 48)
+			idx++;
+		for (; ope[idx] != '\0'; i++)
+			if (ope[idx] > 57 || ope[idx] < 48)
 			{
 				not_int = 1;
 				break;
@@ -23,19 +23,19 @@ void push(stack_t **stack, unsigned int line_num, char *ope)
 		if (not_int == 1)
 		{
 			fprintf(stderr, "L%d: usage: push integer\n", line_num);
+			free_stack(*stack);
+			free(ope);
 			exit(EXIT_FAILURE);
 		}
 	}
 	else
 	{
 		fprintf(stderr, "L%d: usage: push integer\n", line_num);
+		free_stack(*stack);
+		free(ope);
 		exit(EXIT_FAILURE);
 	}
-	n = atoi(ope);
-	add_node(stack, n);
+	num = atoi(ope);
+	add_node(stack, num);
 
 }
-
-
-
-
