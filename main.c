@@ -1,4 +1,5 @@
 #include "monty.h"
+operation_t ops = {NULL, NULL, NULL};
 /**
  * main - monty code interpreter
  * @argc: number of arguments
@@ -26,10 +27,11 @@ int main(int argc, char *argv[])
 		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
 		exit(EXIT_FAILURE);
 	}
-
+	ops.file = file;
 	while (read_line > 0)
 	{
 		read_line = getline(&content, &size, file);
+		ops.line = content;
 		counter++;
 		if (read_line > 0)
 		{
