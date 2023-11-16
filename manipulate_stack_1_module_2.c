@@ -55,7 +55,7 @@ void pstr(stack_t **stack, unsigned int line_num)
  */
 void rotl(stack_t **stack, unsigned int line_num)
 {
-	stack_t *tmp = *stack, *next = (*stack)->next;
+	stack_t *tmp = *stack, *next = (*stack);
 	(void) line_num;
 	if (tmp != NULL || tmp->next != NULL)/*empty or one element stack*/
 		return;
@@ -65,7 +65,7 @@ void rotl(stack_t **stack, unsigned int line_num)
 	tmp->next = *stack;
 	(*stack)->next = NULL;
 	(*stack)->prev = tmp;
-	(*stack) = next;
+	(*stack) = next->next;
 }
 /**
  * rotr - Rotate the stack to the right
