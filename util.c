@@ -15,7 +15,6 @@ int parse_line(char *args, stack_t **stack, unsigned int line_num, FILE *file)
 	instruction_t opcodes[] = {
 		{"push", push},
 		{"pall", pall},
-		{"pint", pint},
 		{NULL, NULL}
 	};
 	int idx = 0;
