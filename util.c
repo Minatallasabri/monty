@@ -20,6 +20,10 @@ int parse_line(char *args, stack_t **stack, unsigned int line_num, FILE *file)
 		{"swap", swap},
 		{"mul", mul},
 		{"mod", mod},
+		{"pchar", pchar},
+		{"pstr", pstr},
+		{"rotl", rotl},
+		{"rotr", rotr},
 		{NULL, NULL}
 	};
 	int idx = 0;
@@ -37,7 +41,7 @@ int parse_line(char *args, stack_t **stack, unsigned int line_num, FILE *file)
 	}
 	if (opcode && opcodes[idx].opcode == NULL)
 	{
-		fprintf(stderr, " L%u: unknown instruction %s\n\n", line_num, opcode);
+		fprintf(stderr, " L%u: unknown instruction %s\n", line_num, opcode);
 		fclose(file);
 		free(args);
 		free_stack(*stack);

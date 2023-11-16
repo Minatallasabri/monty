@@ -64,9 +64,16 @@ void pint(stack_t **, unsigned int);
 void pop(stack_t **, unsigned int);
 void swap(stack_t **, unsigned int);
 
+/*manipulate_stack_1_module_2.c*/
+void pchar(stack_t **, unsigned int);
+void pstr(stack_t **, unsigned int);
+void rotl(stack_t **, unsigned int);
+void rotr(stack_t **, unsigned int);
+
 /*arithmetic.c*/
 void mul(stack_t **, unsigned int);
 void mod(stack_t **, unsigned int);
+
 /*util.c*/
 int parse_line(char *, stack_t **, unsigned int, FILE *);
 void free_stack(stack_t *);
