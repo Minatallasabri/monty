@@ -44,8 +44,6 @@ typedef struct instruction_s
 
 void push(stack_t **, unsigned int, char *);
 void pall(stack_t **, unsigned int, char *);
-void pint(stack_t **, unsigned int , char *);
-void pop(stack_t **, unsigned int , char *);
 int parse_line(char *, stack_t **, unsigned int , FILE *);
 void free_stack(stack_t *);
 void add_node(stack_t **head, int n);
