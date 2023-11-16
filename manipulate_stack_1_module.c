@@ -23,6 +23,7 @@ void push(stack_t **stack, unsigned int line_num)
 		{
 			fprintf(stderr, "L%d: usage: push integer\n", line_num);
 			fclose(ops.file);
+			free_stack(*stack);
 			free(ops.line);
 			exit(EXIT_FAILURE);
 		}
@@ -32,6 +33,7 @@ void push(stack_t **stack, unsigned int line_num)
 		fprintf(stderr, "L%d: usage: push integer\n", line_num);
 		fclose(ops.file);
 		free(ops.line);
+		free_stack(*stack);
 		exit(EXIT_FAILURE);
 	}
 	n = atoi(ops.int_value);
@@ -73,6 +75,7 @@ void pint(stack_t **stack, unsigned int line_num)
 		fprintf(stderr, "L%d: can't pint, stack empty\n", line_num);
 		fclose(ops.file);
 		free(ops.line);
+		free_stack(*stack);
 		exit(EXIT_FAILURE);
 	}
 	printf("%d\n", (*stack)->n);
@@ -91,6 +94,7 @@ void pop(stack_t **stack, unsigned int line_num)
 	{
 		fprintf(stderr, "L%d: can't pop an empty stack\n", line_num);
 		fclose(ops.file);
+		free_stack(*stack);
 		free(ops.line);
 		exit(EXIT_FAILURE);
 	}
@@ -115,9 +119,10 @@ void swap(stack_t **stack, unsigned int line_num)
 	}
 	if (stack_len < 2)
 	{
-		fprintf(stderr, "L%d: can't swap, stack too short,\n", line_num);
+		fprintf(stderr, "L%d: can't swap, stack too short\n", line_num);
 		fclose(ops.file);
 		free(ops.line);
+		free_stack(*stack);
 		exit(EXIT_FAILURE);
 	}
 	tmp_num = (*stack)->n;

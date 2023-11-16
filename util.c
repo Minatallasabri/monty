@@ -18,6 +18,8 @@ int parse_line(char *args, stack_t **stack, unsigned int line_num, FILE *file)
 		{"pall", pall},
 		{"pop", pop},
 		{"swap", swap},
+		{"mul", mul},
+		{"mod", mod},
 		{NULL, NULL}
 	};
 	int idx = 0;

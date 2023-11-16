@@ -63,6 +63,10 @@ void pall(stack_t **, unsigned int);
 void pint(stack_t **, unsigned int);
 void pop(stack_t **, unsigned int);
 void swap(stack_t **, unsigned int);
+
+/*arithmetic.c*/
+void mul(stack_t **, unsigned int);
+void mod(stack_t **, unsigned int);
 /*util.c*/
 int parse_line(char *, stack_t **, unsigned int, FILE *);
 void free_stack(stack_t *);
