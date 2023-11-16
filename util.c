@@ -20,6 +20,8 @@ int parse_line(char *args, stack_t **stack, unsigned int line_num, FILE *file)
 	int idx = 0;
 
 	opcode = strtok(args, DELIMITER);
+	if (opcode && opcode[0] == "#")/*In case of comments*/
+		return (0)
 	operand = strtok(NULL, DELIMITER);
 	while (opcodes[idx].opcode && opcode)
 	{
