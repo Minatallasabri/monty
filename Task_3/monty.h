@@ -57,11 +57,13 @@ typedef struct operation_s
 
 extern operation_t ops;
 
+/*manipulate_stack_1_module.c*/
 void push(stack_t **, unsigned int);
 void pall(stack_t **, unsigned int);
 void pint(stack_t **, unsigned int);
 void pop(stack_t **, unsigned int);
 void swap(stack_t **, unsigned int);
+/*util.c*/
 int parse_line(char *, stack_t **, unsigned int, FILE *);
 void free_stack(stack_t *);
 void add_node(stack_t **head, int n);
