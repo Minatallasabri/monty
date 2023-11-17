@@ -7,34 +7,27 @@
 */
 void _div(stack_t **head, unsigned int line_num)
 {
-	stack_t *h;
 	int len = 0, tmp;
 
-	h = *head;
-	while (h)
+	ops.stk = *head;
+	while (ops.stk)
 	{
-		h = h->next;
+		ops.stk = ops.stk->next;
 		len++;
 	}
 	if (len < 2)
 	{
 		fprintf(stderr, "L%d: can't div, stack too short\n", line_num);
-		fclose(ops.file);
-		free(ops.line);
-		free_stack();
-		exit(EXIT_FAILURE);
+		ops.stk = *head;
+		free_all();
 	}
-	h = *head;
-	if (h->n == 0)
+	ops.stk = *head;
+	if (ops.stk->n == 0)
 	{
 		fprintf(stderr, "L%d: division by zero\n", line_num);
-		fclose(ops.file);
-		free(ops.line);
-		free_stack();
-		exit(EXIT_FAILURE);
+		free_all();
 	}
-	tmp = h->next->n / h->n;
-	h->next->n = tmp;
-	*head = h->next;
-	free(h);
+	tmp = ops.stk->next->n / ops.stk->n;
+	ops.stk->next->n = tmp;
+	pop(head, line_num);
 }
