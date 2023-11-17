@@ -86,14 +86,6 @@ void add_node(stack_t **stack, const int n)
 	}
 	new->n = n;
 	new->prev = NULL;
-
-
-	if ((*stack) != NULL)
-	{
-		while ((*stack)->prev != NULL)
-			*stack = (*stack)->prev;
-	}
-
 	new->next = *stack;
 
 	if ((*stack) != NULL)
