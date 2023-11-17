@@ -68,6 +68,7 @@ void swap(stack_t **, unsigned int);
 void add(stack_t **head, unsigned int line_num);
 void nop(stack_t **stack, unsigned int line_num);
 void sub(stack_t **head, unsigned int line_num);
+void _div(stack_t **head, unsigned int line_num);
 
 /*manipulate_stack_1_module_2.c*/
 void pchar(stack_t **, unsigned int);

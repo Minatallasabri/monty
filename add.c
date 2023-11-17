@@ -32,4 +32,3 @@ void add(stack_t **head, unsigned int line_num)
 	*head = h->next;
 	free(h);
 }
-
