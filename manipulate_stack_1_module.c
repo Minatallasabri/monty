@@ -89,18 +89,20 @@ void pint(stack_t **stack, unsigned int line_num)
  */
 void pop(stack_t **stack, unsigned int line_num)
 {
-	stack_t *tmp = *stack;
-
-	if (*stack == NULL)
+	if (!stack || !(*stack))
 	{
-		fprintf(stderr, "L%d: can't pop an empty stack\n", line_num);
-		fclose(ops.file);
-		free_stack();
-		free(ops.line);
-		exit(EXIT_FAILURE);
+		fprintf(stderr, "L%u: can't pop an empty stack\n", line_number);
+		free_all();
+		return;
 	}
-	*stack = tmp->next;
-	free(tmp);
+
+	ops.stk = *stack;
+
+	*stack = ops.stk->next;
+	if (*stack != NULL)
+		(*stack)->prev = NULL;
+	free(ops.stk);
+	ops.stk = *stack;
 }
 /**
  * swap - Swaps the top 2 elements of the stack
@@ -110,24 +112,23 @@ void pop(stack_t **stack, unsigned int line_num)
  */
 void swap(stack_t **stack, unsigned int line_num)
 {
-	stack_t *tmp = *stack;
+	ops.stk = *stack;
 	int stack_len = 0, tmp_num;
 
-	while (tmp)
+	while (ops.stk)
 	{
 		stack_len++;
-		tmp = tmp->next;
+		ops.stk = ops.stk->next;
 	}
 	if (stack_len < 2)
 	{
 		fprintf(stderr, "L%d: can't swap, stack too short\n", line_num);
-		fclose(ops.file);
-		free(ops.line);
-		free_stack();
-		exit(EXIT_FAILURE);
+		ops.stk = *stack;
+		free_all()
 	}
+	ops.stk = *stack;
+
 	tmp_num = (*stack)->n;
-	(*stack)->n = (*stack)->next->n;
-	(*stack)->next->n = tmp_num;
-	free(tmp);
+	ops.stk->n = ops.stk->next->n;
+	ops.stk->next->n = tmp_num;
 }
