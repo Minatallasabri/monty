@@ -17,7 +17,6 @@ void push(stack_t **stack, unsigned int line_num)
 			if (ops.int_value[i] > 57 || ops.int_value[i] < 48)
 			{
 				not_int = 1;
-				break;
 			}
 		if (not_int == 1)
 		{

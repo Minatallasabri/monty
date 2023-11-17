@@ -5,7 +5,6 @@
  * @args: The line feed form monty byte code
  * @stack: The current stack of operands
  * @line_num: The line number i.e operation number
- * @file: the file to read instruction from
  *
  * Return: the number of characters read
  *
@@ -80,7 +79,11 @@ void add_node(stack_t **stack, const int n)
 
 	new = malloc(sizeof(stack_t));
 	if (new == NULL)
+	{
+		fprintf(stderr, "Error: malloc failed\n");
+		free_all(*stack);
 		return;
+	}
 	new->n = n;
 	new->prev = NULL;
 
