@@ -9,7 +9,11 @@ void queue(stack_t **head, unsigned int line_num)
 {
 	(void)head;
 	(void)line_num;
+<<<<<<< HEAD
 	ops.line = 1;
+=======
+	ops.int_value = "";
+>>>>>>> 19439f410212aebe49efcb42eb7d094cee07bde3
 }
 
 /**
