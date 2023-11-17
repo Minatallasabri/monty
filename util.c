@@ -1,5 +1,5 @@
 #include "monty.h"
-
+int parse_line(char *args, stack_t **stack, unsigned int line_num);
 /**
  * parse_line - execute the desired operation
  * @args: The line feed form monty byte code
@@ -13,7 +13,6 @@ int parse_line(char *args, stack_t **stack, unsigned int line_num)
 {
 	char *opcode = NULL;
 	instruction_t opcodes[] = {
-		{"push", push},
 		{"pint", pint},
 		{"pall", pall},
 		{"pop", pop},
@@ -32,6 +31,11 @@ int parse_line(char *args, stack_t **stack, unsigned int line_num)
 	if (opcode && opcode[0] == '#')
 		return (0);
 	ops.int_value = strtok(NULL, DELIMITER);
+	if (strcmp(opcode, "push") == 0)
+	{
+		handle_push(stack, line_num);
+		return (0);
+	}
 	while (opcodes[idx].opcode && opcode)
 	{
 		if (strcmp(opcode, opcodes[idx].opcode) == 0)

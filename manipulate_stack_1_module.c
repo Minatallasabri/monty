@@ -1,36 +1,45 @@
 #include "monty.h"
 /**
- * push - add node to the stack
+ * handle_push - add node to the stack
  * @stack: stack head
  * @line_num: line_number
  * Return: no return
  */
-void push(stack_t **stack, unsigned int line_num)
+void handle_push(stack_t **stack, unsigned int line_num)
 {
-	int n, i = 0, not_int = 0;
+	float floatValue = 0.0;
+	int int_value, is_number = 1, i;
 
-	if (ops.int_value)
-	{
-		if (ops.int_value[0] == '-')
-			i++;
-		for (; ops.int_value[i] != '\0'; i++)
-			if (ops.int_value[i] > 57 || ops.int_value[i] < 48)
-			{
-				not_int = 1;
-			}
-		if (not_int == 1)
-		{
-			fprintf(stderr, "L%d: usage: push integer\n", line_num);
-			free_all(*stack);
-		}
-	}
-	else
+	if (!ops.int_value)
 	{
 		fprintf(stderr, "L%d: usage: push integer\n", line_num);
 		free_all(*stack);
+		return;
 	}
-	n = atoi(ops.int_value);
-	add_node(stack, n);
+	if (ops.int_value[0] == '0')
+	{
+		add_node(stack, 0);
+		return;
+	}
+	for (i = 0; ops.int_value[i] != '\0'; i++)
+	{
+		if (!isdigit(ops.int_value[i]) && ops.int_value[i] != '-')
+		{
+			if (ops.int_value[i] != '.')
+				is_number = 0;
+			break;
+		}
+	}
+
+	floatValue = strtof(ops.int_value, NULL);
+	int_value = (int)floatValue;
+	if (floatValue != int_value || !is_number)
+	{
+		fprintf(stderr, "L%d: usage: push integer\n", line_num);
+		free_all(*stack);
+		return;
+	}
+	add_node(stack, int_value);
 }
 /**
  * pall - prints the stack

@@ -58,7 +58,7 @@ typedef struct operation_s
 extern operation_t ops;
 
 /*manipulate_stack_1_module.c*/
-void push(stack_t **, unsigned int);
+void handle_push(stack_t **, unsigned int);
 void pall(stack_t **, unsigned int);
 void pint(stack_t **, unsigned int);
 void pop(stack_t **, unsigned int);
