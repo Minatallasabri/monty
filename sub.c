@@ -7,23 +7,19 @@
  */
 void sub(stack_t **head, unsigned int line_num)
 {
-	stack_t *tmp_num;
 	int nod, nodes;
 
-	tmp_num = *head;
-	for (nodes = 0; tmp_num != NULL; nodes++)
-		tmp_num = tmp_num->next;
+	ops.stk = *head;
+	for (nodes = 0; ops.stk != NULL; nodes++)
+		ops.stk = ops.stk->next;
 	if (nodes < 2)
 	{
 		fprintf(stderr, "L%d: can't sub, stack too short\n", line_num);
-		fclose(ops.file);
-		free(ops.line);
-		free_stack();
-		exit(EXIT_FAILURE);
+		ops.stk = *head;
+		free_all();
 	}
-	tmp_num = *head;
-	nod = tmp_num->next->n - tmp_num->n;
-	tmp_num->next->n = nod;
-	*head = tmp_num->next;
-	free(tmp_num);
+	ops.stk = *head;
+	nod = ops.stk->next->n - ops.stk->n;
+	ops.stk->next->n = nod;
+	pop(head, line_num);
 }

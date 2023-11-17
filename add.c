@@ -9,26 +9,17 @@
 */
 void add(stack_t **head, unsigned int line_num)
 {
-	stack_t *h;
-	int length = 0, tmp_num;
+	int tmp_num = 0;
 
-	h = *head;
-	while (h)
+	if ((*head) == NULL || (*head)->next == NULL)
 	{
-		h = h->next;
-		length++;
+		fprintf(stderr, "L%u: can't add, stack too short\n", line_num);
+		ops.stk = *head;
+		free_all();
+		return;
 	}
-	if (length < 2)
-	{
-		fprintf(stderr, "L%d: can't add, stack too short\n", line_num);
-		fclose(ops.file);
-		free(ops.line);
-		free_stack();
-		exit(EXIT_FAILURE);
-	}
-	h = *head;
-	tmp_num = h->n + h->next->n;
-	h->next->n = tmp_num;
-	*head = h->next;
-	free(h);
+	ops.stk = *head;
+	tmp_num = ops.stk->n + ops.stk->next->n;
+	ops.stk->next->n = tmp_num;
+	pop(head, line_num);
 }
