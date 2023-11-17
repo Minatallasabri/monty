@@ -10,7 +10,7 @@
  * Return: the number of characters read
  *
  */
-int parse_line(char *args, stack_t **stack, unsigned int line_num, FILE *file)
+int parse_line(char *args, stack_t **stack, unsigned int line_num)
 {
 	char *opcode = NULL;
 	instruction_t opcodes[] = {
@@ -29,9 +29,9 @@ int parse_line(char *args, stack_t **stack, unsigned int line_num, FILE *file)
 
 	opcode = strtok(args, DELIMITER);
 	if (opcode == NULL)
-		return;
+		return (1);
 	if (opcode && opcode[0] == '#')
-		return;
+		return (0);
 	ops.int_value = strtok(NULL, DELIMITER);
 	while (opcodes[idx].opcode && opcode)
 	{

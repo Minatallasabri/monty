@@ -8,9 +8,7 @@ operation_t ops = {NULL, NULL, NULL};
  */
 int main(int argc, char *argv[])
 {
-	(void) ops;
 	char *content = NULL;
-
 	FILE *file; /*file pointer*/
 	size_t size = 0;
 	int read_line = 1;
@@ -36,7 +34,7 @@ int main(int argc, char *argv[])
 		counter++;
 		if (read_line > 0)
 		{
-			parse_line(content, &stack, counter, file);
+			parse_line(content, &stack, counter);
 		}
 	}
 	free(content);
