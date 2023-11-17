@@ -69,6 +69,7 @@ void add(stack_t **head, unsigned int line_num);
 void nop(stack_t **stack, unsigned int line_num);
 void sub(stack_t **head, unsigned int line_num);
 void _div(stack_t **head, unsigned int line_num);
+void queue(stack_t **head, unsigned int line_num);
 
 /*manipulate_stack_1_module_2.c*/
 void pchar(stack_t **, unsigned int);
@@ -84,6 +85,7 @@ void mod(stack_t **, unsigned int);
 void parse_line(char *, stack_t **, unsigned int);
 void free_stack(void);
 void add_node(stack_t **head, int n);
+void add_queue(stack_t **head, int n);
 void free_all(void);
 void read_line(FILE *file);
 #endif
