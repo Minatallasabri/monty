@@ -82,6 +82,6 @@ int parse_line(char *, stack_t **, unsigned int);
 void free_stack(stack_t *);
 void add_node(stack_t **head, int n);
 void free_all(stack_t *);
-
+void read_line(FILE *file);
 #endif
 

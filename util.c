@@ -19,6 +19,8 @@ int parse_line(char *args, stack_t **stack, unsigned int line_num)
 		{"swap", swap},
 		{"pchar", pchar},
 		{"pstr", pstr},
+		{"mul", mul},
+		{"mod", mod},
 		{"rotl", rotl},
 		{"rotr", rotr},
 		{NULL, NULL}
@@ -109,4 +111,29 @@ void free_all(stack_t *stk)
 	free(ops.line);
 	fclose(ops.file);
 	exit(EXIT_FAILURE);
+}
+
+#include "monty.h"
+
+/**
+ * read_line - Reads lines from a file
+ * @file: Pointer to the file to read from
+ *
+ * This function reads lines from the provided file and performs
+ * the necessary operations on each line.
+ */
+void read_line(FILE *file)
+{
+	unsigned int num_lines = 1;
+	size_t n = 0;
+	char *line = NULL;
+	stack_t *stack = NULL;
+
+	while (getline(&line, &n, file) != -1)
+	{
+		ops.line = line;
+		parse_line(line, &stack, num_lines);
+		num_lines++;
+	}
+	free(line);
 }
