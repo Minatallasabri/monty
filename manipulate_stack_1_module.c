@@ -13,7 +13,7 @@ void handle_push(stack_t **stack, unsigned int line_num)
 	if (!ops.int_value)
 	{
 		fprintf(stderr, "L%d: usage: push integer\n", line_num);
-		free_all(*stack);
+		free_all();
 		return;
 	}
 	if (ops.int_value[0] == '0')
@@ -36,7 +36,7 @@ void handle_push(stack_t **stack, unsigned int line_num)
 	if (floatValue != int_value || !is_number)
 	{
 		fprintf(stderr, "L%d: usage: push integer\n", line_num);
-		free_all(*stack);
+		free_all();
 		return;
 	}
 	add_node(stack, int_value);
@@ -76,7 +76,7 @@ void pint(stack_t **stack, unsigned int line_num)
 		fprintf(stderr, "L%d: can't pint, stack empty\n", line_num);
 		fclose(ops.file);
 		free(ops.line);
-		free_stack(*stack);
+		free_stack();
 		exit(EXIT_FAILURE);
 	}
 	printf("%d\n", (*stack)->n);
@@ -95,7 +95,7 @@ void pop(stack_t **stack, unsigned int line_num)
 	{
 		fprintf(stderr, "L%d: can't pop an empty stack\n", line_num);
 		fclose(ops.file);
-		free_stack(*stack);
+		free_stack();
 		free(ops.line);
 		exit(EXIT_FAILURE);
 	}
@@ -123,7 +123,7 @@ void swap(stack_t **stack, unsigned int line_num)
 		fprintf(stderr, "L%d: can't swap, stack too short\n", line_num);
 		fclose(ops.file);
 		free(ops.line);
-		free_stack(*stack);
+		free_stack();
 		exit(EXIT_FAILURE);
 	}
 	tmp_num = (*stack)->n;

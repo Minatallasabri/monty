@@ -1,5 +1,5 @@
 #include "monty.h"
-operation_t ops = {NULL, NULL, NULL};
+operation_t ops = {NULL, NULL, NULL, NULL};
 /**
  * main - monty code interpreter
  * @argc: number of arguments
@@ -9,7 +9,6 @@ operation_t ops = {NULL, NULL, NULL};
 int main(int argc, char *argv[])
 {
 	FILE *file;
-	stack_t *stack = NULL;
 
 	(void)ops;
 	/*check If the user does not give any file*/
@@ -25,8 +24,8 @@ int main(int argc, char *argv[])
 		exit(EXIT_FAILURE);
 	}
 	ops.file = file;
-	read_line(file);/*start reading*/
-	free_stack(stack);
+	read_line(file);
+	free_stack();
 	fclose(file);
 	return (0);
 }

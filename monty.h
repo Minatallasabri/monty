@@ -44,6 +44,7 @@ typedef struct instruction_s
  * @int_value: The inteager in the line
  * @line: The line red from file
  * @file: The file providing the commands
+ * @stk: The stack head
  *
  * Description: info needed
  * for stack, queues, LIFO, FIFO
@@ -53,6 +54,7 @@ typedef struct operation_s
 	char  *int_value;
 	char *line;
 	FILE *file;
+	stack_t *stk;
 } operation_t;
 
 extern operation_t ops;
@@ -78,10 +80,10 @@ void mul(stack_t **, unsigned int);
 void mod(stack_t **, unsigned int);
 
 /*util.c*/
-int parse_line(char *, stack_t **, unsigned int);
-void free_stack(stack_t *);
+void parse_line(char *, stack_t **, unsigned int);
+void free_stack(void);
 void add_node(stack_t **head, int n);
-void free_all(stack_t *);
+void free_all(void);
 void read_line(FILE *file);
 #endif
 

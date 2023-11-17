@@ -1,5 +1,5 @@
 #include "monty.h"
-int parse_line(char *args, stack_t **stack, unsigned int line_num);
+void parse_line(char *args, stack_t **stack, unsigned int line_num);
 /**
  * parse_line - execute the desired operation
  * @args: The line feed form monty byte code
@@ -9,9 +9,10 @@ int parse_line(char *args, stack_t **stack, unsigned int line_num);
  * Return: the number of characters read
  *
  */
-int parse_line(char *args, stack_t **stack, unsigned int line_num)
+void parse_line(char *args, stack_t **stack, unsigned int line_num)
 {
 	char *opcode = NULL;
+	unsigned int idx = 0, flag = 0;
 	instruction_t opcodes[] = {
 		{"pint", pint},
 		{"pall", pall},
@@ -25,51 +26,48 @@ int parse_line(char *args, stack_t **stack, unsigned int line_num)
 		{"rotr", rotr},
 		{NULL, NULL}
 	};
-	int idx = 0;
 
 	opcode = strtok(args, DELIMITER);
 	if (opcode == NULL)
-		return (1);
+		return;
 	if (opcode && opcode[0] == '#')
-		return (0);
+		return;
 	ops.int_value = strtok(NULL, DELIMITER);
 	if (strcmp(opcode, "push") == 0)
 	{
 		handle_push(stack, line_num);
-		return (0);
+		return;
 	}
 	while (opcodes[idx].opcode && opcode)
 	{
 		if (strcmp(opcode, opcodes[idx].opcode) == 0)
 		{
 			opcodes[idx].func(stack, line_num);
-			return (0);
+			return;
 		}
 		idx++;
 	}
-	if (opcode && opcodes[idx].opcode == NULL)
+	if (flag == 0)
 	{
-		fprintf(stderr, " L%u: unknown instruction %s\n", line_num, opcode);
-		free_all(*stack);
+		fprintf(stderr, "L%d: unknown instruction %s\n", line_num, opcode);
+		free_all();
 	}
-	return (1); /*error form opcode*/
 }
 
 
 /**
  * free_stack - Free the stack
- * @stack: The stack to be freed
  *
  */
-void free_stack(stack_t *stack)
+void free_stack(void)
 {
-	stack_t *head = stack;
+	stack_t *head = ops.stk;
 
-	while (stack)
+	while (ops.stk)
 	{
-		head = stack->next;
-		free(stack);
-		stack = head;
+		head = ops.stk->next;
+		free(ops.stk);
+		ops.stk = head;
 	}
 }
 /**
@@ -79,35 +77,34 @@ void free_stack(stack_t *stack)
  * @stack: head of the list
  * @n: value of the element
  */
-void add_node(stack_t **stack, const int n)
+void add_node(stack_t **stack, int n)
 {
-	stack_t *new;
+	stack_t *node = malloc(sizeof(stack_t));
 
-	new = malloc(sizeof(stack_t));
-	if (new == NULL)
+	if (!node)
 	{
 		fprintf(stderr, "Error: malloc failed\n");
-		free_all(*stack);
+		free_all();
 		return;
 	}
-	new->n = n;
-	new->prev = NULL;
-	new->next = *stack;
 
-	if ((*stack) != NULL)
-		(*stack)->prev = new;
+	node->n = n;
+	node->prev = NULL;
+	node->next = *stack;
 
-	*stack = new;
+	if (*stack)
+		(*stack)->prev = node;
 
+	*stack = node;
+	ops.stk = node;
 }
 /**
  * free_all - handle all file closing anf freeing and exit
- * @stk: The current stack of operands
  *
  */
-void free_all(stack_t *stk)
+void free_all(void)
 {
-	free_stack(stk);
+	free_stack();
 	free(ops.line);
 	fclose(ops.file);
 	exit(EXIT_FAILURE);

@@ -20,7 +20,7 @@ void mul(stack_t **stack, unsigned int line_num)
 	{
 		fprintf(stderr, "L%d: can't mul, stack too short\n", line_num);
 		fclose(ops.file);
-		free_stack(*stack);
+		free_stack();
 		free(ops.line);
 		exit(EXIT_FAILURE);
 	}
@@ -51,7 +51,7 @@ void mod(stack_t **stack, unsigned int line_num)
 	{
 		fprintf(stderr, "L%d: can't mod, stack too short\n", line_num);
 		fclose(ops.file);
-		free_stack(*stack);
+		free_stack();
 		free(ops.line);
 		exit(EXIT_FAILURE);
 	}
@@ -59,7 +59,7 @@ void mod(stack_t **stack, unsigned int line_num)
 	{
 		fprintf(stderr, "L%d: division by zero\n", line_num);
 		fclose(ops.file);
-		free_stack(*stack);
+		free_stack();
 		free(ops.line);
 		exit(EXIT_FAILURE);
 	}

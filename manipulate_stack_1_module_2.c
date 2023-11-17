@@ -12,7 +12,7 @@ void pchar(stack_t **stack, unsigned int line_num)
 		fprintf(stderr, "L%d: can't char, stack empty\n", line_num);
 		fclose(ops.file);
 		free(ops.line);
-		free_stack(*stack);
+		free_stack();
 		exit(EXIT_FAILURE);
 	}
 	if ((*stack)->n < 0 || (*stack)->n > 127)
@@ -20,7 +20,7 @@ void pchar(stack_t **stack, unsigned int line_num)
 		fprintf(stderr, "L%d: can't char, value out of range\n", line_num);
 		fclose(ops.file);
 		free(ops.line);
-		free_stack(*stack);
+		free_stack();
 		exit(EXIT_FAILURE);
 	}
 	printf("%c\n", (*stack)->n);
