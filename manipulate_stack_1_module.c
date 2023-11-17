@@ -22,24 +22,17 @@ void push(stack_t **stack, unsigned int line_num)
 		if (not_int == 1)
 		{
 			fprintf(stderr, "L%d: usage: push integer\n", line_num);
-			fclose(ops.file);
-			free_stack(*stack);
-			free(ops.line);
-			exit(EXIT_FAILURE);
+			free_all(*stack);
 		}
 	}
 	else
 	{
 		fprintf(stderr, "L%d: usage: push integer\n", line_num);
-		fclose(ops.file);
-		free(ops.line);
-		free_stack(*stack);
-		exit(EXIT_FAILURE);
+		free_all(*stack);
 	}
 	n = atoi(ops.int_value);
 	add_node(stack, n);
 }
-
 /**
  * pall - prints the stack
  * @stack: stack head

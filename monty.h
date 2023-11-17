@@ -78,6 +78,7 @@ void mod(stack_t **, unsigned int);
 int parse_line(char *, stack_t **, unsigned int, FILE *);
 void free_stack(stack_t *);
 void add_node(stack_t **head, int n);
+void free_all(stack_t *);
 
 #endif
 

@@ -8,6 +8,7 @@ operation_t ops = {NULL, NULL, NULL};
  */
 int main(int argc, char *argv[])
 {
+	(void) ops;
 	char *content = NULL;
 
 	FILE *file; /*file pointer*/
@@ -22,7 +23,7 @@ int main(int argc, char *argv[])
 		exit(EXIT_FAILURE);
 	}
 	file = fopen(argv[1], "r"); /*read  monty file containg input and opcodes*/
-	if (!file)
+	if (!file || !argv[1])
 	{
 		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
 		exit(EXIT_FAILURE);

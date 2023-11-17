@@ -1,4 +1,5 @@
 #include "monty.h"
+
 /**
  * parse_line - execute the desired operation
  * @args: The line feed form monty byte code
@@ -18,8 +19,6 @@ int parse_line(char *args, stack_t **stack, unsigned int line_num, FILE *file)
 		{"pall", pall},
 		{"pop", pop},
 		{"swap", swap},
-		{"mul", mul},
-		{"mod", mod},
 		{"pchar", pchar},
 		{"pstr", pstr},
 		{"rotl", rotl},
@@ -29,6 +28,10 @@ int parse_line(char *args, stack_t **stack, unsigned int line_num, FILE *file)
 	int idx = 0;
 
 	opcode = strtok(args, DELIMITER);
+	if (opcode == NULL)
+		return;
+	if (opcode && opcode[0] == '#')
+		return;
 	ops.int_value = strtok(NULL, DELIMITER);
 	while (opcodes[idx].opcode && opcode)
 	{
@@ -42,10 +45,7 @@ int parse_line(char *args, stack_t **stack, unsigned int line_num, FILE *file)
 	if (opcode && opcodes[idx].opcode == NULL)
 	{
 		fprintf(stderr, " L%u: unknown instruction %s\n", line_num, opcode);
-		fclose(file);
-		free(args);
-		free_stack(*stack);
-		exit(EXIT_FAILURE);
+		free_all(*stack);
 	}
 	return (1); /*error form opcode*/
 }
@@ -98,4 +98,16 @@ void add_node(stack_t **stack, const int n)
 
 	*stack = new;
 
+}
+/**
+ * free_all - handle all file closing anf freeing and exit
+ * @stk: The current stack of operands
+ *
+ */
+void free_all(stack_t *stk)
+{
+	free_stack(stk);
+	free(ops.line);
+	fclose(ops.file);
+	exit(EXIT_FAILURE);
 }
